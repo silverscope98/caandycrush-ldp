@@ -15,6 +15,8 @@ public:
     void draw();
     Cell *boardCells[9][9];
 
+    void sinkCandy(Coord deletedCell);
+
     bool swapCandy(Coord c1, Coord c2);
     void generateCandy(Coord c1);
     void deleteCandy(Coord c1);

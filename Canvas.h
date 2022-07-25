@@ -12,7 +12,7 @@
 #include <cmath>
 
 class Canvas{
-    Board *grid;
+    Board grid;
     //Game game;
 public:
     Canvas();

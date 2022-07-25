@@ -52,6 +52,9 @@ void Candy::calculateColor() {
 }
 
 void Candy::draw(){
+    if(candyType==-1){
+        return;
+    }
     fl_color(candyColor);
     //std::cout << center.x << center.y << std::endl;
     fl_pie(center.x,center.y,radius,radius,0,360);

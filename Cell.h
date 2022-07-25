@@ -14,10 +14,11 @@ class Cell {
     Coord cellCoord;
     Coord pixelPoint;
     Square sq;
-    Candy candy;
 public:
     Cell(int x, int y);
     void draw();
+
+    Candy candy;
 };
 
 
