@@ -9,26 +9,29 @@
 #include <FL/Enumerations.H>
 #include <FL/fl_draw.H>
 #include "Coord.h"
-#include "ConstantsCC.h"
-#include "candyRNG.h"
+#include "CandyRNG.h"
+#include "Square.h"
 
 class Candy {
+    std::vector<int> emptyBlackList;
 public:
-    int candyType;
-    Fl_Color candyColor;
-    Coord center;
-    int radius = (windowHeight+windowWidth)/30;
-    Candy(Coord location);
-    Candy(int candyType, Coord location);
+    Coord center{};
+    int candyType{};
+    Fl_Color candyColor{};
+    int length = defaultCandyLength;
+    void draw();
+
+    explicit Candy(Coord location);
+
     Candy() = default;
 
-    int getCandyType() const;
+    void resetLength();
 
     void setCandyType(int candyType);
 
     void calculateColor();
 
-    void draw();
+    void shuffleType();
 };
 
 

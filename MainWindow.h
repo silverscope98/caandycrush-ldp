@@ -15,14 +15,13 @@
 #include <vector>
 #include <iostream>
 #include <random>
-#include "Canvas.h"
-#include "ConstantsCC.h"
+#include "Game.h"
 using namespace std;
 
 class MainWindow : public Fl_Window{
 
 
-    Canvas canvas;
+    Game game;
     public:
 
     MainWindow();

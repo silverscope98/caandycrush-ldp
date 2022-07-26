@@ -7,28 +7,31 @@
 
 
 #include "Cell.h"
+#include "Animations.h"
 
 class Board {
 public:
     Board();
 
     void draw();
-    Cell *boardCells[9][9];
+    Cell boardCells[9][9];
 
-    void sinkCandy(Coord deletedCell);
+    Cell& getCell(Coord target);
+    std::vector<Coord> cellsOnPath(int range, Coord target, int xDir, int yDir);
+    std::vector<Coord> getAboveCells(int range, Coord target);
+    std::vector<Coord> getBelowCells(int range, Coord target);
+    std::vector<Coord> getLeftCells(int range, Coord target);
+    std::vector<Coord> getRightCells(int range, Coord target);
+    void setCandyType(Coord target, int candyType);
+    Candy& getCandy(Coord target);
+    int getCandyType(Coord target);
 
-    bool swapCandy(Coord c1, Coord c2);
-    void generateCandy(Coord c1);
-    void deleteCandy(Coord c1);
+    void swapCandy(Coord c1, Coord c2);
+    void deleteCandy(Coord target);
+    void sinkCandy(Coord target);
+    void generateDisjointCandy(Coord c1);
 
-
-    //bool checkStrike(Coord c1);
-    //bool actionsExists();
-    //void animateShift(Coord c1, Coord c2);
-    //void animateShrink(Coord c1);
-    //void sinkCandy(Coord c1);
 
 };
-
 
 #endif //CANDYCRUSH_BOARD_H

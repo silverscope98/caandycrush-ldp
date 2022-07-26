@@ -2,24 +2,26 @@
 // Created by hars on 23/07/22.
 //
 
-#include <iostream>
 #include "Candy.h"
 
 
 Candy::Candy(Coord location) {
-    candyType = candyRNG::drawType(6);
-    center.x = location.x-(windowWidth/10)*0.3125;
-    center.y = location.y-(windowHeight/10)*0.3125;
+    shuffleType();
+    center = location.getCenterPixel();
     calculateColor();
 
 }
-Candy::Candy(int type, Coord location) {
-    candyType = type;
-}
 
+void Candy::shuffleType() {
+    setCandyType(CandyRNG::drawType(emptyBlackList));
+
+}
 
 void Candy::calculateColor() {
     switch (candyType) {
+        case 0:
+            candyColor = FL_WHITE;
+            break;
         case 1:
             candyColor = FL_RED;
             break;
@@ -52,22 +54,24 @@ void Candy::calculateColor() {
 }
 
 void Candy::draw(){
-    if(candyType==-1){
-        return;
-    }
     fl_color(candyColor);
-    //std::cout << center.x << center.y << std::endl;
-    fl_pie(center.x,center.y,radius,radius,0,360);
+    fl_polygon	(center.x,center.y+length/2,
+                   center.x-length/2,center.y,
+                   center.x,center.y-length/2,
+                   center.x+length/2,center.y);
 }
 
-int Candy::getCandyType() const {
-    return candyType;
-}
 
 void Candy::setCandyType(int candyType) {
     Candy::candyType = candyType;
     calculateColor();
 }
+
+void Candy::resetLength() {
+    length= defaultCandyLength;
+}
+
+
 
 
 

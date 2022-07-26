@@ -11,14 +11,18 @@
 #include "Candy.h"
 
 class Cell {
+
+public:
     Coord cellCoord;
     Coord pixelPoint;
-    Square sq;
-public:
     Cell(int x, int y);
     void draw();
 
+    Cell() = default;
     Candy candy;
+
+    Square sq;
+
 };
 
 

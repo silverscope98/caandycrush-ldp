@@ -3,17 +3,13 @@
 //
 
 #include "Cell.h"
-#include "ConstantsCC.h"
 
 
 Cell::Cell(int x, int y) {
-    int sqLength = (windowWidth+windowHeight)/20;
     int candyType = 1;
     cellCoord = Coord{x,y};
-    pixelPoint = Coord{7+(x+1)*sqLength,20+(y+1)*sqLength};
-
-    candy = Candy{pixelPoint};
-    sq =  Square{pixelPoint, sqLength, FL_WHITE, FL_BLACK,};
+    candy = Candy{Coord{x,y}};
+    sq =  Square{cellCoord.getCenterPixel()};
 }
 
 void Cell::draw() {
@@ -21,5 +17,7 @@ void Cell::draw() {
     candy.draw();
 
 }
+
+
 
 

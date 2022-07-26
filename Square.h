@@ -9,16 +9,17 @@
 #include <FL/Enumerations.H>
 #include "Coord.h"
 
-class Square {
 
+class Square {
+    public:
     Coord center;
     int l;
-    Fl_Color fillColor, frameColor;
-    public:
+    Fl_Color fillColor=FL_BLACK, frameColor=FL_BLACK;
     void draw();
     void setFillColor(Fl_Color newFillColor);
     void setFrameColor(Fl_Color newFrameColor);
     bool contains(Coord p);
+    Square(Coord centerPoint);
 
     Square(Coord center, int l, Fl_Color fillColor, Fl_Color frameColor);
     Square() = default;
