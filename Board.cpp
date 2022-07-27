@@ -57,6 +57,7 @@ Candy& Board::getCandy(Coord target) {
     return getCell(target).candy;
 }
 int Board::getCandyType(Coord target) {
+    std::cout << "TARGETING : " << target.x << target.y << std::endl;
     return getCandy(target).candyType;
 }
 void Board::setCandyType(Coord target, int candyType) {

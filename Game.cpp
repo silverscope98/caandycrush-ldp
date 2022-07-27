@@ -140,7 +140,7 @@ void Game::sinkCandy(int x) {
     }
     int candyCount = 0;
     for (int y = 0; y < 9; ++y) {
-        if(board.getCandyType(Coord{x,y+1})!=0) {
+        if(y==8 || board.getCandyType(Coord{x,y+1})!=0) {
             candyCount+=1;
             continue;
         }
