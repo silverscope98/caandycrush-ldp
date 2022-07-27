@@ -63,32 +63,13 @@ void Board::setCandyType(Coord target, int candyType) {
     getCandy(target).setCandyType(candyType);
 }
 
-void Board::deleteCandy(Coord target) {
-    Candy &targetCandy = getCandy(target);
-    Animations::shrinkCandy(targetCandy);
-    targetCandy.resetLength();
-    sinkCandy(target);
-    Animations::growCandy(getCandy(Coord{target.x,0}));
-}
+//void Board::deleteCandy(Coord target) {
+//    animations.shrinkCandy(target);
+//    getCandy(target).resetLength();
+//    sinkCandy(target);
+//    animations.growCandy(target);
+//}
 
-void Board::sinkCandy(Coord target) {
-    if(getCandyType(target) != 0){
-        throw std::invalid_argument( "Square has not been deleted" );
-    };
-    int x = target.x;
-    int y = target.y - 1;
-    while(y>=0) {
-        swapCandy(Coord{x, y + 1}, Coord{x, y});
-        y -= 1;
-    }
-}
-
-void Board::swapCandy(Coord c1, Coord c2) {
-    int c1type = getCandyType(c1);
-    int c2type = getCandyType(c2);
-    setCandyType(c1,c2type);
-    setCandyType(c2,c1type);
-}
 
 std::vector<Coord> Board::cellsOnPath(int range, Coord target, int xDir, int yDir) {
     std::vector<Coord> output;
@@ -125,6 +106,7 @@ std::vector<Coord> Board::getRightCells(int range, Coord target) {
 }
 
 void Board::generateDisjointCandy(Coord c1) {
+    //move if statements inside fxns.
     std::vector <int> neighborTypes;
     if(c1.x!=0) {
         neighborTypes.push_back(getCandyType(getLeftCells(1,c1)[0]));
@@ -152,8 +134,3 @@ void Board::draw() {
 }
 
 
-/*
-bool Board::actionExists() {
-    return false;
-}
- */

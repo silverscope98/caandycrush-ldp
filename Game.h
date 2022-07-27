@@ -8,11 +8,11 @@
 #include <unistd.h>
 #include "Board.h"
 #include "Animations.h"
-
 #include <cmath>
 
 class Game{
     Board board;
+    Animations animations{board};
 public:
     Coord selection{-1, -1};
     Game() = default;
@@ -29,9 +29,21 @@ public:
 
     bool evalMove(Coord &c1, Coord &c2);
 
-    bool validMove(Coord &target);
+    bool streakCutter(Coord &core, bool evaluatingBoard);
 
     bool evalBoard();
+
+
+    void swapCandy(Coord c1, Coord c2);
+    //void deleteCandy(Coord target);
+    void multiDeleteCandies(std::vector <Coord> &markedCandies, bool evaluatingBoard);
+
+    void printDetails(Coord c1);
+
+
+    void rainCandy(int x);
+
+    void sinkCandy(int x);
 };
 
 

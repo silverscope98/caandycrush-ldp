@@ -7,16 +7,18 @@
 
 
 #include "Cell.h"
+#include "Board.h"
 
 class Animations {
 public:
-    Animations() = default;
+    Board &board;
+    void translateCandy(Cell &target, Coord endPoint);
 
-    static void translateCandy(Cell &target, Coord endPoint);
+    Animations(Board &board);
 
-    static void shrinkCandy(Candy &target);
+    void shrinkCandies(std::vector<Coord> &targets);
 
-    static void growCandy(Candy &target);
+    [[maybe_unused]] void shrinkCandy(Coord target);
 };
 
 

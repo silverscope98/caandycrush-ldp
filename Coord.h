@@ -7,6 +7,7 @@
 
 
 #include <vector>
+#include <iostream>
 #include "ConstantsCC.h"
 
 class Coord {
@@ -24,6 +25,9 @@ public:
     }
     int yDistanceTo(Coord c2){
         return c2.y-y;
+    }
+    void printCoord(){
+        std::cout << "{" <<x << ", "<< y << "}" ;
     }
 
 

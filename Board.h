@@ -7,12 +7,10 @@
 
 
 #include "Cell.h"
-#include "Animations.h"
 
 class Board {
 public:
     Board();
-
     void draw();
     Cell boardCells[9][9];
 
@@ -25,13 +23,7 @@ public:
     void setCandyType(Coord target, int candyType);
     Candy& getCandy(Coord target);
     int getCandyType(Coord target);
-
-    void swapCandy(Coord c1, Coord c2);
-    void deleteCandy(Coord target);
-    void sinkCandy(Coord target);
     void generateDisjointCandy(Coord c1);
-
-
 };
 
 #endif //CANDYCRUSH_BOARD_H

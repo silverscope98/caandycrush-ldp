@@ -5,30 +5,24 @@
 #include <FL/Fl.H>
 #include "Animations.h"
 
-void Animations::shrinkCandy(Candy &target) {
-    int &l = target.length;
-    while(l>=defaultCandyLength*0.05) {
-        l = l*0.95;
-        target.draw();
-        Fl::wait(1);
-    }
-
-    target.setCandyType(0);
+[[maybe_unused]] void Animations::shrinkCandy(Coord target) {
+    std::vector<Coord> T;
+    T.push_back(target);
+    shrinkCandies(T);
 }
-void Animations::growCandy(Candy &target) {
-    int &l = target.length;
-    l = 5;
-    target.shuffleType();
-    while (l <= defaultCandyLength) {
-        l = l * 1.2;
-        if(l >= defaultCandyLength*0.9){
-            break;
+void Animations::shrinkCandies(std::vector<Coord> &targets) {
+    int l = defaultCandyLength;
+    while (l>=defaultCandyLength*0.05) {
+        l *=0.8;
+        for (Coord &c: targets) {
+            board.getCandy(c).length= l;
+            board.getCandy(c).draw();
+            Fl::wait(1);
         }
-        target.draw();
-        Fl::wait(5);
     }
-    target.resetLength();
-
+    for (Coord &c: targets) {
+        board.setCandyType(c,0);
+    }
 }
 
 void Animations::translateCandy(Cell &target,Coord endPoint) {
@@ -40,3 +34,7 @@ void Animations::translateCandy(Cell &target,Coord endPoint) {
         Fl::wait(1);
     }
 }
+
+Animations::Animations(Board &board) : board(board) {}
+
+

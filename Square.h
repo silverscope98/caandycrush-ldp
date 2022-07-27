@@ -14,7 +14,7 @@ class Square {
     public:
     Coord center;
     int l;
-    Fl_Color fillColor=FL_BLACK, frameColor=FL_BLACK;
+    Fl_Color fillColor=FL_BLACK, frameColor=FL_WHITE;
     void draw();
     void setFillColor(Fl_Color newFillColor);
     void setFrameColor(Fl_Color newFrameColor);

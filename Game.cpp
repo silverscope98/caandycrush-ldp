@@ -17,16 +17,27 @@ void Game::mouseClick(Coord mouseLoc) {
         for (int y = 0; y < 9; ++y) {
             Cell &target = board.getCell(Coord{x, y});
             if (target.sq.contains(mouseLoc)) {
-                //evalSelect(Coord {x,y});
-                board.deleteCandy(target.cellCoord);
+                evalSelect(Coord {x,y});
             }
         }
     }
 }
 
+void Game::printDetails(Coord c1){
+    std::cout << "CANDY TYPE :" << board.getCandyType(c1) << std::endl
+              << "COORD :";
+    c1.printCoord();
+    std::cout << std::endl;
+    std::cout << std::endl;
+
+
+}
+
 void Game::evalSelect(Coord target){
     if(selection.x == -1){
         selection = target;
+        std::cout << "Selected : " << std::endl;
+        printDetails(selection);
         return;
     }
     int absDistance = abs(selection.xDistanceTo(target) + selection.yDistanceTo(target));
@@ -36,48 +47,68 @@ void Game::evalSelect(Coord target){
     selection = Coord{-1,-1};
 }
 
-bool Game::validMove(Coord &target){
+bool Game::streakCutter(Coord &core,bool evaluatingBoard = false){
     std::vector <Coord> markedCandies;
-    int targetType = board.getCandyType(target);
-    //Scan right
-    for (int x = 0; x < 8-target.x; ++x) {
-        if(board.getCandyType(Coord{target.x+x,target.y})==targetType){
-            markedCandies.emplace_back(target.x+x,target.y);
+    std::vector <Coord> tempMarked;
+    int coreType = board.getCandyType(core);
+
+    //Horizontal scan
+        //scan right
+    for (int x = 1; x < 9 - core.x; ++x) {
+        if(board.getCandyType(Coord{core.x + x, core.y}) == coreType){
+            tempMarked.emplace_back(core.x + x, core.y);
         }
-        else {break;}
+        else break;
     }
-    //scan left
-    for (int x = 1; x < target.x+1; ++x) {
-        if(board.getCandyType(Coord{target.x-x,target.y})==targetType){
-            markedCandies.emplace_back(target.x-x,target.y);
+        //scan left
+    for (int x = 1; x < core.x + 1; ++x) {
+        bool targetMatches = board.getCandyType(Coord{core.x - x, core.y}) == coreType;
+        if (targetMatches) {
+            tempMarked.emplace_back(core.x - x, core.y);
         }
-        else {break;}
+        else break;
     }
-    //scan up
-    for (int y = 1; y < target.y+1; ++y) {
-        if(board.getCandyType(Coord{target.x,target.y-y})==targetType){
-            markedCandies.emplace_back(target.x,target.y-y);
+    if(tempMarked.size()>=2){
+        std::cout   << "Found Horizontal strike"<< std::endl;
+        markedCandies.insert(markedCandies.end(), tempMarked.begin(), tempMarked.end());
+    }
+    tempMarked.clear();
+    //Vertical Scan
+        //scan up
+    for (int y = 1; y < core.y + 1; ++y) {
+        if(board.getCandyType(Coord{core.x, core.y - y}) == coreType){
+            tempMarked.emplace_back(core.x, core.y - y);
         }
-        else {break;}
+        else break;
     }
-    //scan down
-    for (int y = 0; y < 8-target.y; ++y) {
-        if(board.getCandyType(Coord{target.x,target.y+y})==targetType){
-            markedCandies.emplace_back(target.x,target.y+y);
+        //scan down
+    for (int y = 1; y < 9 - core.y; ++y) {
+        bool targetMatches = board.getCandyType(Coord{core.x, core.y + y}) == coreType;
+        if(targetMatches){
+            tempMarked.emplace_back(core.x, core.y + y);
         }
-        else {break;}
+        else break;
     }
+    if(tempMarked.size()>=2){
+        std::cout   << "Found vertical strike"<< std::endl;
+        markedCandies.insert(markedCandies.end(), tempMarked.begin(), tempMarked.end());
+    }
+    tempMarked.clear();
+
     //delete marked candies
-    for (Coord &c:markedCandies) {
-        board.deleteCandy(c);
+    if(!markedCandies.empty()){
+        markedCandies.push_back(core);
+        multiDeleteCandies(markedCandies,evaluatingBoard);
+        return true;
     }
-    return markedCandies.empty();
+    return false;
 }
 
 bool Game::evalMove(Coord &c1, Coord &c2){
-    board.swapCandy(c1,c2);
-    if(!validMove(c2)){
-        board.swapCandy(c2,c1);
+    printDetails(c2);
+    swapCandy(c1,c2);
+    if(!streakCutter(c2)){
+        swapCandy(c2,c1);
         return false;
     }
     evalBoard();
@@ -85,12 +116,66 @@ bool Game::evalMove(Coord &c1, Coord &c2){
 }
 
 bool Game::evalBoard(){
-//    board.swapCandy(c1,c2);
-//    if(!searchAndDestroy()){
-//        board.swapCandy(c2,c1);
-//        return false;
-//    }
+    for (int x = 0; x < 9; ++x) {
+        for (int y = 0; y < 9; ++y) {
+            Coord core = Coord{x, y};
+            if (streakCutter(core, true)) {
+                return false;
+            }
+        }
+    }
     return true;
 }
 
+void Game::swapCandy(Coord c1, Coord c2) {
+    int c1type = board.getCandyType(c1);
+    int c2type = board.getCandyType(c2);
+    board.setCandyType(c1,c2type);
+    board.setCandyType(c2,c1type);
+}
 
+void Game::sinkCandy(int x) {
+    if(board.getCandyType(Coord{x,0})==0){
+        return;
+    }
+    int candyCount = 0;
+    for (int y = 0; y < 9; ++y) {
+        if(board.getCandyType(Coord{x,y+1})!=0) {
+            candyCount+=1;
+            continue;
+        }
+        else{
+            swapCandy(Coord{x,y},Coord{x,y+1});
+        }
+    }
+    if(candyCount==9) {
+        return;
+    }
+    sinkCandy(x);
+}
+
+
+void Game::rainCandy(int x){
+    if(board.getCandyType(Coord{x,0})!=0){
+        return;
+    }
+    board.getCandy(Coord{x,0}).shuffleType();
+    sinkCandy(x);
+}
+
+void Game::multiDeleteCandies(std::vector <Coord> &markedCandies, bool evaluatingBoard = false) {
+    animations.shrinkCandies(markedCandies);
+    for (Coord &c:markedCandies) {
+        board.getCandy(c).resetLength();
+    }
+    for (Coord &c:markedCandies) {
+        sinkCandy(c.x);
+        rainCandy(c.x);
+    }
+    while(true){
+        if(evalBoard()) break;
+    }
+    for (int x = 0; x < 9; ++x) {
+        rainCandy(x);
+    }
+}
