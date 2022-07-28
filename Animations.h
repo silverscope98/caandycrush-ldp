@@ -12,13 +12,16 @@
 class Animations {
 public:
     Board &board;
-    void translateCandy(Cell &target, Coord endPoint);
-
     Animations(Board &board);
 
     void shrinkCandies(std::vector<Coord> &targets);
 
     [[maybe_unused]] void shrinkCandy(Coord target);
+
+
+    void intersectCandy(Coord c1, Coord c2, int speedMultiplier);
+
+    void restoreCandy(Coord c1, Coord c2, int speedMultiplier);
 };
 
 

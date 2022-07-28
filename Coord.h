@@ -10,6 +10,25 @@
 #include <iostream>
 #include "ConstantsCC.h"
 
+class Point {
+public:
+    float x;
+    float y;
+    Point(float x, float y) : x(x), y(y) {
+    }
+    float xDistanceTo(Point c2){
+        return c2.x-x;
+    }
+    float yDistanceTo(Point c2){
+        return c2.y-y;
+    }
+    Point() = default;
+    void printPoint(){
+        std::cout << "{" <<x << ", "<< y << "}" ;
+    }
+};
+
+
 class Coord {
 public:
     int x;
@@ -17,9 +36,7 @@ public:
     Coord(int x, int y) : x(x), y(y) {
     }
     Coord() = default;
-    Coord getCenterPixel() const{
-        return Coord{7+(x+1)*cellSize,20+(y+1)*cellSize};
-    };
+
     int xDistanceTo(Coord c2){
         return c2.x-x;
     }
@@ -29,8 +46,6 @@ public:
     void printCoord(){
         std::cout << "{" <<x << ", "<< y << "}" ;
     }
-
-
 };
 
 

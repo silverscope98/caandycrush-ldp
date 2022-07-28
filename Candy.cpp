@@ -5,9 +5,9 @@
 #include "Candy.h"
 
 
-Candy::Candy(Coord location) {
+Candy::Candy(Point centerPoint) {
     shuffleType();
-    center = location.getCenterPixel();
+    center = centerPoint;
     calculateColor();
 
 }

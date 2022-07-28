@@ -12,16 +12,15 @@
 
 class Square {
     public:
-    Coord center;
+    Point center;
     int l;
-    Fl_Color fillColor=FL_BLACK, frameColor=FL_WHITE;
+    Fl_Color fillColor=FL_WHITE, frameColor=FL_BLACK;
     void draw();
     void setFillColor(Fl_Color newFillColor);
     void setFrameColor(Fl_Color newFrameColor);
     bool contains(Coord p);
-    Square(Coord centerPoint);
+    Square(Point centerPoint);
 
-    Square(Coord center, int l, Fl_Color fillColor, Fl_Color frameColor);
     Square() = default;
 
 };

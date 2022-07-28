@@ -4,11 +4,6 @@
 #include <FL/fl_draw.H>
 #include "Square.h"
 
-Square::Square(Coord center,int l, Fl_Color fillColor,Fl_Color frameColor)
-               :center(center),l(l),fillColor(fillColor),frameColor(frameColor){}
-
-
-
 void Square::draw() {
     fl_draw_box(FL_FLAT_BOX,center.x-l/2,center.y-l/2,l,l,fillColor);
     fl_draw_box(FL_BORDER_FRAME,center.x-l/2,center.y-l/2,l,l,frameColor);
@@ -31,7 +26,7 @@ bool Square::contains(Coord p) {
            p.y<center.y+l/2;
 }
 
-Square::Square(Coord centerPoint) {
+Square::Square(Point centerPoint) {
     l = cellSize;
     center = centerPoint;
 }

@@ -24,6 +24,9 @@ public:
     Candy& getCandy(Coord target);
     int getCandyType(Coord target);
     void generateDisjointCandy(Coord c1);
+
+    void switchCandyType(Coord c1, Coord c2);
+
 };
 
 #endif //CANDYCRUSH_BOARD_H

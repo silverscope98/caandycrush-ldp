@@ -15,13 +15,13 @@
 class Candy {
     std::vector<int> emptyBlackList;
 public:
-    Coord center{};
+    Point center{};
     int candyType{};
     Fl_Color candyColor{};
     int length = defaultCandyLength;
     void draw();
 
-    explicit Candy(Coord location);
+    explicit Candy(Point centerPoint);
 
     Candy() = default;
 

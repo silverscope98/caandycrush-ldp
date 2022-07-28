@@ -18,32 +18,26 @@ public:
     Game() = default;
     void draw();
     void mouseClick(Coord mouseLoc);
-//    void keyPressed(int keyCode) {exit(0);}
-//    void action(Coord c1, Coord c2);
-//    void isValidAction(Coord c1, Coord c2);
-//    void deleteRow(Coord c1);
-//    void deleteColumn(Coord c1);
-//    void lDelete(Coord c1);
-//    void bomb(Coord c1);
-    void evalSelect(Coord target);
 
-    bool evalMove(Coord &c1, Coord &c2);
+    void evalSelect(Coord target);
 
     bool streakCutter(Coord &core, bool evaluatingBoard);
 
     bool evalBoard();
 
 
-    void swapCandy(Coord c1, Coord c2);
     //void deleteCandy(Coord target);
     void multiDeleteCandies(std::vector <Coord> &markedCandies, bool evaluatingBoard);
 
     void printDetails(Coord c1);
 
+    bool evalMove(Coord &c1, Coord &c2);
 
-    void rainCandy(int x);
+    void swapCandy(Coord c1, Coord c2, int speed=2);
 
     void sinkCandy(int x);
+
+    void rainCandy(int x);
 };
 
 

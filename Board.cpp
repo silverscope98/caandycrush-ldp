@@ -57,19 +57,18 @@ Candy& Board::getCandy(Coord target) {
     return getCell(target).candy;
 }
 int Board::getCandyType(Coord target) {
-    std::cout << "TARGETING : " << target.x << target.y << std::endl;
     return getCandy(target).candyType;
 }
 void Board::setCandyType(Coord target, int candyType) {
     getCandy(target).setCandyType(candyType);
 }
 
-//void Board::deleteCandy(Coord target) {
-//    animations.shrinkCandy(target);
-//    getCandy(target).resetLength();
-//    sinkCandy(target);
-//    animations.growCandy(target);
-//}
+void Board::switchCandyType(Coord c1, Coord c2) {
+    int c1type = getCandyType(c1);
+    int c2type = getCandyType(c2);
+    setCandyType(c1,c2type);
+    setCandyType(c2,c1type);
+}
 
 
 std::vector<Coord> Board::cellsOnPath(int range, Coord target, int xDir, int yDir) {

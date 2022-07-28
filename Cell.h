@@ -14,7 +14,7 @@ class Cell {
 
 public:
     Coord cellCoord;
-    Coord pixelPoint;
+    Point centerPxl;
     Cell(int x, int y);
     void draw();
 

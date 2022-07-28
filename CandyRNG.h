@@ -11,7 +11,7 @@
 
 #endif //CANDYCRUSH_RNG_H
 
-#define USE_RAND_HERE
+//#define USE_RAND_HERE
 
 
 class CandyRNG{
