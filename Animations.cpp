@@ -31,14 +31,8 @@ void Animations::intersectCandy(Coord c1, Coord c2, int speedMultiplier) {
     Candy &candy2 = board.getCandy(c2);
     Point intersection = Point{candy1.center.x+c1.xDistanceTo(c2)*cellSize/2,
                                candy1.center.y+c1.yDistanceTo(c2)*cellSize/2};
-    std::cout <<"INT : ";
-
-    intersection.printPoint();
-    std::cout << std::endl;
 
     while(true){
-        candy1.center.printPoint();
-        std::cout << std::endl;
         if(abs(candy1.center.xDistanceTo(candy2.center))<=speedMultiplier*1.5 && abs(candy1.center.yDistanceTo(candy2.center))<=speedMultiplier*1.5 ){
             candy1.center = intersection;
             candy2.center = intersection;

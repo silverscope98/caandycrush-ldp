@@ -4,27 +4,15 @@
 
 #include "MainWindow.h"
 /*OUTLINE:
- * 2 HOURS SET 1+2
- * ANIMATE SWAP
- * ANIMATE FALL
- *
- * 3 HOURS SET 3
+ * 1.5 HOURS SET 3
  * RESET IF NO MORE MOVES LEFT
- * ADD SCORE COUNTER
- * ADD BEST SCORE COUNTER
- * LOADING SCREEN
  * ADD SUGGESTIONS
  *
- * 4 HOURS
- * ADD FXNALITY FOR SPECIAL CANDY
- * SLIDING ANIMATION TO SWAP
- *
-
- *
- * 4 HOURS
- * ADD ICING
+ * 4 HOURS SET 4
  * ADD WALLS
-    * ADD WALL MECHANIC
+ * ADD WALL MECHANIC
+ * ADD ICING
+
  * 4 HOURS CLEANUP
  * Make coord/point be template class;
  * Make coord to point converter
@@ -32,6 +20,14 @@
  * To Remove redundancy from fxns of board.disjointcandy
  * Remove redundancy from intersect/restore candy
  * Commentate
+ *
+ *
+ * 4 HOURS
+ * ADD FXNALITY FOR SPECIAL CANDY
+ * SLIDING ANIMATION TO SWAP
+ *
+ * 4 HOURS
+ * REPORT
  */
 
 

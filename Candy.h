@@ -29,9 +29,10 @@ public:
 
     void setCandyType(int candyType);
 
-    void calculateColor();
 
     void shuffleType();
+
+    void transformToType();
 };
 
 

@@ -14,14 +14,16 @@ class Game{
     Board board;
     Animations animations{board};
 public:
+    int score;
+    int bestScore;
     Coord selection{-1, -1};
-    Game() = default;
+    Game();
     void draw();
     void mouseClick(Coord mouseLoc);
 
     void evalSelect(Coord target);
 
-    bool streakCutter(Coord &core, bool evaluatingBoard);
+    bool candyExterminator(Coord &core, bool evaluatingBoard);
 
     bool evalBoard();
 
@@ -38,6 +40,8 @@ public:
     void sinkCandy(int x);
 
     void rainCandy(int x);
+
+    [[maybe_unused]] void diagonalShift(Coord c1, bool left, int speed);
 };
 
 

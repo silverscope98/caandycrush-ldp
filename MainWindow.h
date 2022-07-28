@@ -22,7 +22,9 @@ class MainWindow : public Fl_Window{
 
 
     Game game;
-    public:
+
+public:
+    static int isLoading;
 
     MainWindow();
 
@@ -32,7 +34,10 @@ class MainWindow : public Fl_Window{
 
         static void Timer_CB(void *userdata);
 
-    };
+    void drawLoadingScreen();
+
+    void drawScore();
+};
 
 
 #endif //CANDYCRUSH_MAINWINDOW_H

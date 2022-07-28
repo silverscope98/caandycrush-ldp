@@ -8,7 +8,7 @@
 Candy::Candy(Point centerPoint) {
     shuffleType();
     center = centerPoint;
-    calculateColor();
+    transformToType();
 
 }
 
@@ -17,7 +17,8 @@ void Candy::shuffleType() {
 
 }
 
-void Candy::calculateColor() {
+void Candy::transformToType() {
+    resetLength();
     switch (candyType) {
         case 0:
             candyColor = FL_WHITE;
@@ -48,6 +49,7 @@ void Candy::calculateColor() {
             break;
         case 9:
             candyColor = FL_WHITE;
+            length = 2;
             break;
 
     };
@@ -63,8 +65,9 @@ void Candy::draw(){
 
 
 void Candy::setCandyType(int candyType) {
+
     Candy::candyType = candyType;
-    calculateColor();
+    transformToType();
 }
 
 void Candy::resetLength() {
